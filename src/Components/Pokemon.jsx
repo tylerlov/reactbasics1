@@ -5,13 +5,17 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-function Pokemon() {
+function Pokemon( {pokemon} ) {
 
     const [pokemonName, setPokemonName] = useState('N/A')
     const [pokemonType, setPokemonType] = useState('Type Unknown')
     const [pokemonBio, setPokemonBio] = useState('No Bio Available')
+
+    useEffect(() => {
+        setPokemonName(pokemon.name)
+    }, [])
 
     const card = (
         <React.Fragment>
@@ -35,13 +39,13 @@ function Pokemon() {
         </React.Fragment>
       );
 
-    return (
+    return (<>
         <Box sx={{ minWidth: 275 }}>
             <Card variant='outlined'>
                 {card}
             </Card>
         </Box>
-  )
+    </>)
 }
 
 export default Pokemon
