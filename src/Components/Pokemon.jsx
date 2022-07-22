@@ -10,12 +10,19 @@ import { useEffect, useState } from 'react'
 function Pokemon( {pokemon} ) {
 
     const [pokemonName, setPokemonName] = useState('N/A')
-    const [pokemonType, setPokemonType] = useState('Type Unknown')
-    const [pokemonBio, setPokemonBio] = useState('No Bio Available')
+    const [pokemonDetails, setPokemonDetails] = useState([])
 
     useEffect(() => {
         setPokemonName(pokemon.name)
+        fetchPokemonDetails()
     }, [])
+
+    const fetchPokemonDetails = async () => {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+        const data = await response.json();
+        setPokemonDetails(data)
+        console.log(data)
+      };
 
     const card = (
         <React.Fragment>
@@ -27,10 +34,10 @@ function Pokemon( {pokemon} ) {
               { pokemonName }
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                { pokemonType }
+                {  pokemonDetails.weight }
             </Typography>
             <Typography variant="body2">
-              { pokemonBio }
+              {   }
             </Typography>
           </CardContent>
           <CardActions>
