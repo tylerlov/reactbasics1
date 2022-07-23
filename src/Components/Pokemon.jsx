@@ -34,7 +34,7 @@ function Pokemon( {pokemon} ) {
               { pokemonName }
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                {  pokemonDetails.weight }
+                {  pokemonDetails.types }
             </Typography>
             <Typography variant="body2">
               {   }
