@@ -1,27 +1,21 @@
 import React from "react";
 import Pokemon from "./Pokemon";
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
+import PokeContext from "../context/poke/PokeContext"; 
 
 function PokemonList() {
-  const [pokeList, setPokeList] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const {pokeList, loading, fetchPokemon} = useContext(PokeContext);
 
   useEffect(() => {
     fetchPokemon();
   }, []);
 
-  const fetchPokemon = async () => {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon/");
-    const data = await response.json();
-    setPokeList(data.results);
-    setLoading(false);
-  };
 
   if (!loading) {
     return (
       <>
         {pokeList.map((pokemonObj) => (
-            <Pokemon key={pokemonObj.id} pokemon={pokemonObj} />
+            <Pokemon key={pokemonObj.name} pokemon={pokemonObj} />
         ))}
       </>
     );

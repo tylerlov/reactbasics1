@@ -17,13 +17,14 @@ function Pokemon( { pokemon } ) {
 
     useEffect(() => {
         fetchPokemonDetails()
-    }, [ pokemon ])
+    }, [ ])
 
     const fetchPokemonDetails = async () => {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
         const data = await response.json();
         setPokemonDetails(data)
-        setPokemonType(pokemonDetails.types.map(types => types.type.name).join(', '))
+        // why do the question marks work here? follow up on this
+        setPokemonType(pokemonDetails?.types?.map(types => types.type.name).join(', '))
         console.log(data)
         setLoading(false)
       };
@@ -36,7 +37,7 @@ function Pokemon( { pokemon } ) {
             </Typography>
                <CardMedia 
                 component="img"
-                sx={{ height: 100, paddingTop: '50%' }} 
+                sx={{ height: 200, width: 200, paddingTop: '10%' }} 
                 image={pokemonDetails.sprites.other.dream_world.front_default} />
             <Typography variant="h5" component="div">
               { pokemon.name }
@@ -45,7 +46,7 @@ function Pokemon( { pokemon } ) {
                 {  pokemonType }
             </Typography>
             <Typography variant="body2">
-              {  pokemonDetails.weight + ' lbs'}
+              {/* {  pokemonDetails.weight + ' lbs'} */}
             </Typography>
           </CardContent>
           <CardActions>
