@@ -46,7 +46,7 @@ function Pokemon( { pokemon } ) {
                 {  pokemonType }
             </Typography>
             <Typography variant="body2">
-              {/* {  pokemonDetails.weight + ' lbs'} */}
+              {  pokemonDetails.weight + ' lbs'}
             </Typography>
           </CardContent>
           <CardActions>
