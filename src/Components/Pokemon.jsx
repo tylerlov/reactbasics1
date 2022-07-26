@@ -5,29 +5,19 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react'
+import { useEffect, useContext } from 'react'
+import PokeContext from '../context/poke/PokeContext'
 import { CardMedia } from '@mui/material';
 
 //Possible to destructure this variable better to reduce the amount of code later?
-function Pokemon( { pokemon } ) {
+function Pokemon( pokemonObj ) {
 
-    const [pokemonDetails, setPokemonDetails] = useState([])
-    const [pokemonType, setPokemonType] = useState('N/A')
-    const [loading, setLoading] = useState(true);
+    const { pokemon, loading, fetchPokemonDetails } = useContext(PokeContext);
 
     useEffect(() => {
-        fetchPokemonDetails()
+        console.log(pokemonObj.pokemon)
+        fetchPokemonDetails( pokemonObj.pokemon )
     }, [ ])
-
-    const fetchPokemonDetails = async () => {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
-        const data = await response.json();
-        setPokemonDetails(data)
-        // why do the question marks work here? follow up on this
-        setPokemonType(pokemonDetails?.types?.map(types => types.type.name).join(', '))
-        console.log(data)
-        setLoading(false)
-      };
 
     const card = (
         <Card sx={{ minWidth: 275 }}>
@@ -38,15 +28,16 @@ function Pokemon( { pokemon } ) {
                <CardMedia 
                 component="img"
                 sx={{ height: 200, width: 200, paddingTop: '10%' }} 
-                image={pokemonDetails.sprites.other.dream_world.front_default} />
+                //Why ? here? Makes sense for pokemonDetails but why for sprites?
+                image={pokemon?.sprites?.other.dream_world.front_default} />
             <Typography variant="h5" component="div">
-              { pokemon.name }
+              { pokemonObj.name }
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                {  pokemonType }
+                {/* {  pokemonType } */}
             </Typography>
             <Typography variant="body2">
-              {  pokemonDetails.weight + ' lbs'}
+              {  pokemon?.weight + ' lbs'}
             </Typography>
           </CardContent>
           <CardActions>

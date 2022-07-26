@@ -6,6 +6,17 @@ const pokeReducer = (state, action) => {
                 pokeList: action.payload,
                 loading: false,
             }
+        case "FETCH_SINGLE_POKEMON":
+            return {
+                ...state,
+                pokemon: action.payload,
+                loading: false,
+            }
+        case "SET_LOADING":
+            return {
+                ...state,
+                loading: true,
+            }
         default:
             return state;
     }
