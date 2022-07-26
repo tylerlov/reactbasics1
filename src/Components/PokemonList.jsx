@@ -21,7 +21,7 @@ function PokemonList() {
     return (
       <>
         {pokeList.map((pokemonObj) => (
-            <Pokemon key={pokemonObj.name} pokemon={pokemonObj}/>
+            <Pokemon key={pokemonObj.id} pokemon={pokemonObj} />
         ))}
       </>
     );
